@@ -92,6 +92,139 @@ try { ... } catch { /* no variable needed */ }
 - **Authorization checks** in all controllers
 - **Use UUIDs** instead of predictable IDs where appropriate
 
+## GDPR Compliance
+
+### Core Principles
+
+All applications handling EU user data must comply with GDPR. Build privacy into every feature.
+
+- **Lawfulness** - Have a valid legal basis for processing (consent, contract, legal obligation, legitimate interest)
+- **Purpose limitation** - Only collect data for specified, explicit purposes
+- **Data minimization** - Collect only what is strictly necessary
+- **Accuracy** - Keep data accurate and up to date
+- **Storage limitation** - Don't keep data longer than necessary
+- **Integrity & confidentiality** - Protect data with appropriate security
+
+### Privacy by Design
+
+Build privacy into systems from the start, not as an afterthought:
+
+- **Default to privacy** - Most restrictive settings by default
+- **Minimal data collection** - Question every field: "Do we really need this?"
+- **Purpose-specific** - Don't repurpose data without new consent
+- **Encryption** - Encrypt PII at rest and in transit
+- **Access controls** - Limit who can access personal data
+
+### Consent Management
+
+```typescript
+// Consent must be:
+// - Freely given (no pre-ticked boxes)
+// - Specific (separate consent for each purpose)
+// - Informed (clear explanation of what they're agreeing to)
+// - Unambiguous (clear affirmative action)
+// - Withdrawable (as easy to withdraw as to give)
+
+interface UserConsent {
+    marketing_emails: boolean
+    analytics_tracking: boolean
+    third_party_sharing: boolean
+    consented_at: Date
+    ip_address: string
+    consent_version: string  // Track which privacy policy version
+}
+```
+
+### Data Subject Rights
+
+Implement endpoints/functionality for all GDPR rights:
+
+| Right | Implementation |
+| ----- | -------------- |
+| Access (Art. 15) | Export all user data in machine-readable format |
+| Rectification (Art. 16) | Allow users to correct their data |
+| Erasure (Art. 17) | Hard delete or anonymize all user data |
+| Restrict Processing (Art. 18) | Flag to stop processing while disputes resolved |
+| Data Portability (Art. 20) | Export data in JSON/CSV format |
+| Object (Art. 21) | Opt-out of profiling and direct marketing |
+
+### Data Retention Periods
+
+Define and enforce retention periods for all data types:
+
+| Data Type | Retention | Action After |
+| --------- | --------- | ------------ |
+| Active user accounts | While active + 2 years | Anonymize or delete |
+| Inactive accounts | 2 years of inactivity | Email warning, then delete |
+| Transaction records | 7 years (legal requirement) | Archive, restrict access |
+| Server logs | 90 days | Auto-delete |
+| Analytics data | 26 months | Aggregate and anonymize |
+| Marketing consent | Until withdrawn | Delete on withdrawal |
+| Support tickets | 3 years after resolution | Anonymize |
+
+### Cookie Compliance
+
+```typescript
+// Cookie categories - user must consent to non-essential
+enum CookieCategory {
+    ESSENTIAL,      // No consent needed (auth, security, preferences)
+    ANALYTICS,      // Requires consent
+    MARKETING,      // Requires consent
+    THIRD_PARTY     // Requires consent
+}
+
+// Requirements:
+// - Show cookie banner before setting non-essential cookies
+// - Allow granular consent (not just "accept all")
+// - Provide easy way to change preferences
+// - Don't use cookie walls (blocking content until consent)
+// - Document all cookies in privacy policy
+```
+
+### Data Breach Procedures
+
+In case of a data breach:
+
+1. **Detect & contain** - Stop the breach, preserve evidence
+2. **Assess severity** - What data? How many users? What risk?
+3. **Notify ICO** - Within 72 hours if risk to individuals (UK)
+4. **Notify users** - Without undue delay if high risk
+5. **Document** - Record all breaches, even minor ones
+6. **Review** - Update security measures to prevent recurrence
+
+### International Data Transfers
+
+Data leaving the UK/EU requires additional safeguards:
+
+- **Adequacy decision** - Transfer freely to approved countries
+- **Standard Contractual Clauses (SCCs)** - Required for US transfers
+- **Document transfers** - Know where all data flows
+- **Third-party due diligence** - Verify vendors are GDPR compliant
+
+### Third-Party Data Processing
+
+When using external services that process personal data:
+
+- **Data Processing Agreement (DPA)** - Must be signed before sharing data
+- **Vendor assessment** - Verify security measures and GDPR compliance
+- **Document sub-processors** - Know the full chain of data handling
+- **Include in privacy policy** - Disclose all third parties to users
+
+### Privacy Policy Requirements
+
+Every application must have a privacy policy that includes:
+
+- [ ] Identity and contact details of data controller
+- [ ] Types of data collected
+- [ ] Purposes and legal basis for processing
+- [ ] Data retention periods
+- [ ] Third parties data is shared with
+- [ ] International transfers
+- [ ] User rights and how to exercise them
+- [ ] Right to complain to supervisory authority
+- [ ] Cookie policy
+- [ ] Last updated date
+
 ## Performance Standards
 
 - **Eager loading** to prevent N+1 queries
