@@ -60,13 +60,13 @@ This skill fetches a Zoho Projects task and routes to different workflows based 
 
 ## Configuration
 
-Each project using this skill needs configuration in its `.claude/CLAUDE.md` file. This tells the skill which Zoho project, BitBucket repo, and production URL to use.
+Each project using this skill needs configuration in its `.agents/AGENTS.md` file. This tells the skill which Zoho project, BitBucket repo, and production URL to use.
 
-**First-time setup**: If configuration is missing, the skill will prompt you for each value and offer to save them to `.claude/CLAUDE.md` automatically.
+**First-time setup**: If configuration is missing, the skill will prompt you for each value and offer to save them to `.agents/AGENTS.md` automatically.
 
 ### Manual Setup
 
-1. Create `.claude/CLAUDE.md` in your project root (if it doesn't exist)
+1. Create `.agents/AGENTS.md` in your project root (if it doesn't exist)
 2. Add the following configuration:
 
 ```markdown

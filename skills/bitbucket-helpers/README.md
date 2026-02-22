@@ -28,7 +28,7 @@ This prevents the common error:
 
 Identifies the PR author by checking `git config user.email` and matching against the default reviewers response. No hardcoded team member lists required.
 
-**Optional**: For performance, you can cache team member UUIDs in your project's CLAUDE.md under a "Bitbucket Team Members" section.
+**Optional**: For performance, you can cache team member UUIDs in your project's AGENTS.md under a "Bitbucket Team Members" section.
 
 ### 3. Branch Cleanup on Merge
 
@@ -36,7 +36,7 @@ Ensures `close_source_branch: true` is always set when merging PRs to keep the r
 
 ### 4. Workspace/Repo Detection
 
-Extracts workspace and repo slug from git remote URL or project's CLAUDE.md.
+Extracts workspace and repo slug from git remote URL or project's AGENTS.md.
 
 ## Usage
 

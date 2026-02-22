@@ -89,7 +89,7 @@ mcp__bitbucket__bb_post(
 
 Get the workspace and repo slug from:
 - The git remote URL: `git remote get-url origin`
-- Or the project's CLAUDE.md configuration
+- Or the project's AGENTS.md configuration
 
 ### Identifying the Author
 
@@ -99,7 +99,7 @@ To filter out the author from reviewers:
 2. **Match against reviewers**: Compare with the `nickname` or `display_name` from the default reviewers response
 3. **Exclude matching UUID**: Remove the author's UUID from the reviewers list
 
-**Optional caching**: If you frequently create PRs and want to avoid repeated API calls, add a "Bitbucket Team Members" section to your project's CLAUDE.md with the UUIDs. The skill will use cached values when available.
+**Optional caching**: If you frequently create PRs and want to avoid repeated API calls, add a "Bitbucket Team Members" section to your project's AGENTS.md with the UUIDs. The skill will use cached values when available.
 
 ## Quick Reference
 

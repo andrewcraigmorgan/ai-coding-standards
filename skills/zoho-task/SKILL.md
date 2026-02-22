@@ -97,7 +97,7 @@ The client should be able to click directly from the Zoho comment to see the fea
 
 ### Where to Find the Preview URL
 
-**Each project defines its own preview URL in the project's CLAUDE.md** under "Environment URLs". This is the URL where clients verify features.
+**Each project defines its own preview URL in the project's AGENTS.md** under "Environment URLs". This is the URL where clients verify features.
 
 Look for a section like:
 ```
@@ -113,14 +113,14 @@ Or explicit guidance like:
 
 ### CRITICAL: Always Use the Project's Preview URL
 
-**For ALL Zoho comments with verification steps, use the preview URL defined in the project's CLAUDE.md.**
+**For ALL Zoho comments with verification steps, use the preview URL defined in the project's AGENTS.md.**
 
-- The preview URL varies by project - check CLAUDE.md each time
+- The preview URL varies by project - check AGENTS.md each time
 - Clients click these links to verify features work
 - Using the wrong URL means the client cannot verify the feature
 
 **Before posting ANY Zoho comment, verify:**
-- [ ] You have checked the project's CLAUDE.md for the correct preview URL
+- [ ] You have checked the project's AGENTS.md for the correct preview URL
 - [ ] All `<a href="...">` links use the URL specified for client verification
 - [ ] No internal-only URLs (staging, localhost, dev servers) appear in the comment
 
@@ -155,7 +155,7 @@ Every comment with verification steps MUST include:
 Before posting ANY comment with verification steps, check:
 - [ ] Is there at least one `<a href="...">` link in the verification steps?
 - [ ] Does the link include the full path to the relevant page?
-- [ ] Is the URL from the project's CLAUDE.md (the preview URL where clients verify features)?
+- [ ] Is the URL from the project's AGENTS.md (the preview URL where clients verify features)?
 
 If any check fails, add the missing link before showing the preview to the user.
 
@@ -259,7 +259,7 @@ mcp__zoho-projects__get_task_by_prefix(prefix: "PRJ-T123", project_id: "<project
 mcp__zoho-projects__get_task(project_id: "<project_id>", task_id: "<task_id>")
 ```
 
-**Note:** Get the default project ID from the project's CLAUDE.md "Zoho Projects Configuration" section.
+**Note:** Get the default project ID from the project's AGENTS.md "Zoho Projects Configuration" section.
 
 Also fetch task comments for additional context:
 
@@ -318,12 +318,12 @@ Check the task's `status.name` field and route accordingly:
         }
     )
     ```
-    Get the workspace/repo-slug from the git remote or project's CLAUDE.md.
+    Get the workspace/repo-slug from the git remote or project's AGENTS.md.
     Capture the PR number and URL from the response.
     **Note:** PRs are created in draft mode. Only include reviewers who are NOT the author.
 
 9. **Update Zoho task status to "Open"**:
-    Get the "Open" status ID from the project's CLAUDE.md "Zoho Projects Configuration" section.
+    Get the "Open" status ID from the project's AGENTS.md "Zoho Projects Configuration" section.
     If not found, check the "Project Status IDs Reference" section below or ask the user.
     ```
     mcp__zoho-projects__update_task(
@@ -371,7 +371,7 @@ Check the task's `status.name` field and route accordingly:
     **Important**: The comment MUST include:
     - **Feature summary**: Describe what users can now DO, not technical implementation details
     - **Verification steps**: Clear, numbered steps to test the feature
-    - **Preview URL**: Use the preview URL from the project's CLAUDE.md "Environment URLs" section (where clients verify features)
+    - **Preview URL**: Use the preview URL from the project's AGENTS.md "Environment URLs" section (where clients verify features)
     - **Expected outcomes**: What the reviewer should see when following the steps
     - Use client-friendly language (no jargon)
 
@@ -537,7 +537,7 @@ The task is blocked pending client input. Generate clarification questions to ga
 4. **Create screenshot test**: Write a Playwright E2E test that:
    - Navigates to the relevant page(s)
    - Captures screenshots at key steps
-   - Uses the shared viewport config (check project's CLAUDE.md for default size)
+   - Uses the shared viewport config (check project's AGENTS.md for default size)
    - Saves to `screenshots/<feature-name>/` with numbered filenames
 
    Example test structure:
@@ -584,7 +584,7 @@ The task is blocked pending client input. Generate clarification questions to ga
    ```
    Save the `third_party_file_id` and `x-cli-msg` from each response.
 
-7. **Construct the Zoho screenshot comment**: Create an HTML comment following CLAUDE.md guidelines:
+7. **Construct the Zoho screenshot comment**: Create an HTML comment following AGENTS.md guidelines:
    - **No superfluous language**: Do NOT use filler phrases like "Implementation verified complete:", "This feature is now complete", "Here's what you can do:", "Feature verification:", "Investigation Complete:", etc. Start directly with the content.
    - **No redundant titles**: Do NOT start with "[SCREENSHOTS]", "Status update:", "Investigation Complete", "Summary:", or similar meta-titles.
    - Client-friendly language (no technical jargon)
@@ -593,7 +593,7 @@ The task is blocked pending client input. Generate clarification questions to ga
      ```
      https://previewengine-accl.zoho.com/image/WD/{file_id}?x-cli-msg={encoded_data}
      ```
-   - Include environment URLs where applicable (from project's CLAUDE.md)
+   - Include environment URLs where applicable (from project's AGENTS.md)
    - Keep the entire comment on ONE line (no line breaks except explicit `<br>`)
    - Include "How to verify" steps
    - **End with hidden marker**: Always append `<!-- screenshots-evidence -->` at the end for future identification (this is invisible to readers but allows the system to find and update the comment later)
@@ -603,7 +603,7 @@ The task is blocked pending client input. Generate clarification questions to ga
    <ul><li>Key capability 1</li><li>Key capability 2</li></ul><b>1. [Screenshot description]:</b><br/><img src="https://previewengine-accl.zoho.com/image/WD/{file_id}?x-cli-msg={encoded_data}" /><br/><br/><b>How to verify:</b><ol><li>Visit <a href="{PREVIEW_URL}/staff/page">the page</a></li><li>Perform [specific action]</li><li>Observe [expected result]</li></ol><!-- screenshots-evidence -->
    ```
 
-   **Note:** Replace `{PREVIEW_URL}` with the preview URL from the project's CLAUDE.md.
+   **Note:** Replace `{PREVIEW_URL}` with the preview URL from the project's AGENTS.md.
 
 8. **Preview and post/update the screenshot comment**:
 
@@ -660,7 +660,7 @@ Start with what the user can now do, show the evidence, explain how to verify:
 
 **Note:**
 - Use `<ol>` for verification steps (numbered: 1, 2, 3...)
-- Replace URLs with values from project's CLAUDE.md "Environment URLs" section
+- Replace URLs with values from project's AGENTS.md "Environment URLs" section
 
 ### Internal Reference Section (Optional)
 
@@ -695,7 +695,7 @@ Code ready for internal review:<ul><li>Branch: <code>feature/XXX-TXXX-csv-export
 ```
 
 **Note:** Replace placeholders with actual values:
-- `{PREVIEW_URL}` - The preview URL from project's CLAUDE.md "Environment URLs" section (where clients verify features)
+- `{PREVIEW_URL}` - The preview URL from project's AGENTS.md "Environment URLs" section (where clients verify features)
 - `{BITBUCKET_PR_URL}` - The actual PR URL from BitBucket
 
 ## Final Checklist
@@ -723,12 +723,12 @@ Before completing the PR workflow:
 - [ ] **Implementation complete**: All required functionality is working
 - [ ] **Tests pass**: Unit/feature tests verify the implementation
 - [ ] **PR created**: BitBucket PR targeting staging branch
-- [ ] **Status updated**: Task status changed to "Open" (use status ID from project's CLAUDE.md)
+- [ ] **Status updated**: Task status changed to "Open" (use status ID from project's AGENTS.md)
 - [ ] **Comment preview shown**: User has seen and approved the Zoho comment content
 - [ ] **Zoho comment added** with ALL of the following:
   - [ ] PR link for internal reference
   - [ ] Feature summary in plain language
-  - [ ] **Verification steps**: Numbered steps to test (using project's preview URL from CLAUDE.md)
+  - [ ] **Verification steps**: Numbered steps to test (using project's preview URL from AGENTS.md)
   - [ ] **CLICKABLE LINK**: At least one `<a href="...">` link to the specific page where the feature can be tested (MANDATORY)
   - [ ] **Expected outcomes**: What the reviewer should see
 
@@ -747,7 +747,7 @@ If proceeding with screenshot work:
 - [ ] **Language check**: No technical jargon - would a non-developer understand this?
 - [ ] **Action-focused**: Describes what users can DO, not how it was built
 - [ ] **Screenshots**: All images uploaded and embedded inline (using `/image/` not `/thumbnail/`)
-- [ ] **CLICKABLE LINK (MANDATORY)**: At least one `<a href="{PREVIEW_URL}/specific/path">` in verification steps (use URL from project's CLAUDE.md)
+- [ ] **CLICKABLE LINK (MANDATORY)**: At least one `<a href="{PREVIEW_URL}/specific/path">` in verification steps (use URL from project's AGENTS.md)
 - [ ] **Verification steps**: Clear, actionable steps the client can follow
 - [ ] **Single line**: Entire comment on ONE line (no unintended line breaks)
 - [ ] **Update vs Create**: If existing comment found, use `edit_task_comment`; otherwise use `add_task_comment`
@@ -786,40 +786,40 @@ mcp__zoho-projects__update_task(
 
 ## Project Status IDs Reference
 
-**IMPORTANT: Always check the project's CLAUDE.md first for Zoho configuration.**
+**IMPORTANT: Always check the project's AGENTS.md first for Zoho configuration.**
 
 Status IDs vary by project. The correct approach is:
 
-### Step 1: Check Project CLAUDE.md
+### Step 1: Check Project AGENTS.md
 
-Look for a "Zoho Projects Configuration" section in the project's CLAUDE.md file. This section should contain:
+Look for a "Zoho Projects Configuration" section in the project's AGENTS.md file. This section should contain:
 - Project ID
 - Task Prefix (e.g., PRJ)
 - Status IDs table with Open, To Do, Closed, etc.
 
-**If the project CLAUDE.md has Zoho configuration, use those status IDs.**
+**If the project AGENTS.md has Zoho configuration, use those status IDs.**
 
 ### Step 2: If No Configuration Found
 
-If the project's CLAUDE.md does not have a "Zoho Projects Configuration" section:
+If the project's AGENTS.md does not have a "Zoho Projects Configuration" section:
 
 1. **Ask the user** before proceeding:
-   > "I couldn't find Zoho status IDs in this project's CLAUDE.md. Would you like me to:
-   > 1. Look up the status IDs from the Zoho API and add them to CLAUDE.md?
+   > "I couldn't find Zoho status IDs in this project's AGENTS.md. Would you like me to:
+   > 1. Look up the status IDs from the Zoho API and add them to AGENTS.md?
    > 2. Use the fallback reference below?"
 
 2. If the user chooses option 1, fetch a task with "Open" status from the project:
    ```
    mcp__zoho-projects__search(search_term: "Open", module: "tasks", project_id: "<project_id>")
    ```
-   Then add the configuration to the project's CLAUDE.md.
+   Then add the configuration to the project's AGENTS.md.
 
 ### Finding Status IDs
 
 If you need a status ID not listed:
 1. Search for tasks in that status: `mcp__zoho-projects__search(search_term: "status_name", module: "tasks", project_id: "...")`
 2. Look at the `status.id` field in any task response
-3. **Add the status ID to the project's CLAUDE.md** (preferred) or this fallback reference
+3. **Add the status ID to the project's AGENTS.md** (preferred) or this fallback reference
 
 ## Zoho Task URL Format
 
@@ -830,7 +830,7 @@ https://projects.zoho.com/portal/{portal}#milestone/{milestone_id}/{project_id}/
 ```
 
 To construct the URL, extract these IDs from the task response:
-- Portal name from the project's CLAUDE.md or Zoho configuration
+- Portal name from the project's AGENTS.md or Zoho configuration
 - `milestone.id` → `{milestone_id}`
 - `project.id` → `{project_id}`
 - `tasklist.id` → `{tasklist_id}`
@@ -857,17 +857,17 @@ The default viewport for new projects is **Desktop (1440x900)**. Individual proj
 
 ### Project Configuration
 
-Check the project's CLAUDE.md for a "Screenshot Configuration" section specifying the preferred viewport. The project's `tests/e2e/screenshot.config.ts` defines the actual default used by tests.
+Check the project's AGENTS.md for a "Screenshot Configuration" section specifying the preferred viewport. The project's `tests/e2e/screenshot.config.ts` defines the actual default used by tests.
 
 ## Important Notes
 
 - **CLICKABLE LINKS ARE MANDATORY**: Every comment with verification steps MUST include at least one `<a href="...">` link to the specific page where the feature can be tested. Never describe navigation without providing a direct link.
-- **Project ID**: Check project's CLAUDE.md "Zoho Projects Configuration" section
-- **Open Status ID**: Get from project's CLAUDE.md "Zoho Projects Configuration" section (varies by project)
+- **Project ID**: Check project's AGENTS.md "Zoho Projects Configuration" section
+- **Open Status ID**: Get from project's AGENTS.md "Zoho Projects Configuration" section (varies by project)
 - **Never set "In Review"**: The skill should never change a task to "In Review" status - that is reserved for when the client can see the feature on production/testing and is done manually
 - **Awaiting Approval**: Use when task is blocked pending client clarification
-- **Preview URL**: Each project defines its preview URL in CLAUDE.md under "Environment URLs" - ALWAYS use this URL for client verification links in Zoho comments
-- **BitBucket Repo**: Check project's CLAUDE.md or git remote for workspace/repo-slug
+- **Preview URL**: Each project defines its preview URL in AGENTS.md under "Environment URLs" - ALWAYS use this URL for client verification links in Zoho comments
+- **BitBucket Repo**: Check project's AGENTS.md or git remote for workspace/repo-slug
 - **Screenshots are gitignored**: Don't commit screenshot images to the repo (only the test files)
 - **Single-line comments**: Zoho converts newlines to `<br>` tags - keep entire comment on one line
 - **No emojis**: Don't use checkmarks (✅) or other emojis in Zoho comments
