@@ -317,7 +317,6 @@ ROBOTS_NOINDEX=true
 ### Payment Integration
 
 - **Never log card data** - PCI compliance
-- **Use hosted payment pages** where possible (Stripe Elements, PayPal)
 - **Idempotency keys** - Prevent duplicate charges
 - **Webhook verification** - Always verify webhook signatures
 
