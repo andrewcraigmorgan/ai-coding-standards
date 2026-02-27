@@ -1,6 +1,6 @@
 # Global Instructions
 
-**Standards Version: 2.0.0**
+**Standards Version: 1.0.4**
 
 - Never add AI/agent as a contributor in any files (package.json, README, etc.)
 - Never include copyright notices or attribution claiming AI wrote the code
