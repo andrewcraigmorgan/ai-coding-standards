@@ -1,6 +1,6 @@
 # Global Instructions
 
-**Standards Version: 1.0.2**
+**Standards Version: 1.0.3**
 
 - Never add AI/agent as a contributor in any files (package.json, README, etc.)
 - Never include copyright notices or attribution claiming AI wrote the code
@@ -125,6 +125,40 @@ Add to `~/.mcp.json`:
   }
 }
 ```
+
+## Browser Automation (Playwright)
+
+For browser automation, use **Playwright CLI** instead of MCP - it's ~4x more token-efficient (27k vs 114k tokens per task).
+
+### Installation
+
+```bash
+npm install -g @playwright/cli
+npx playwright install  # Install browser binaries
+```
+
+### Usage
+
+Playwright CLI uses shell commands instead of MCP protocol:
+
+```bash
+# Navigate and interact
+playwright navigate "https://example.com"
+playwright click "button#submit"
+playwright fill "input[name=email]" "user@example.com"
+playwright screenshot output.png
+
+# Get page content
+playwright snapshot  # Accessibility tree (recommended)
+playwright content   # Full HTML
+```
+
+### When to Use
+
+- **Use CLI** when your agent has filesystem access (Claude Code, Copilot, Cursor)
+- **Use MCP** (`@playwright/mcp`) only when the agent lacks filesystem access
+
+Reference: [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp)
 
 ## Custom Skills
 
