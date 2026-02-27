@@ -120,6 +120,28 @@ To filter out the author from reviewers:
 }
 ```
 
+## PR Comments Formatting
+
+When adding comments to PRs, follow these rules for proper rendering:
+
+- **No emojis** - Never use checkmarks, crosses, or any emoji characters
+- **Blank lines required** - Add blank line after headings and between list items
+- **One item per line** - Each numbered/bulleted item must be on its own line
+
+```markdown
+# GOOD formatting:
+
+**Must fix:**
+
+1. Fixed - Description here
+2. Fixed - Another item
+
+# BAD formatting (renders as single paragraph):
+
+**Must fix:**
+1. Fixed - Item 2. Fixed - Item
+```
+
 ## Why This Matters
 
 - **Default reviewers**: Ensures proper code review workflow - PRs without reviewers get missed

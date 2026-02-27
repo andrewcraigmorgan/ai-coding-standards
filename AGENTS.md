@@ -123,25 +123,7 @@ Copy to `~/.claude/skills/`:
 | `bitbucket-helpers` | PR creation with default reviewers, merge with branch cleanup |
 | `zoho-task` | Task workflow automation based on Zoho task status |
 
-## Bitbucket
-
-Use the Bitbucket MCP tools (`mcp__bitbucket__bb_*`) for all Bitbucket operations.
-
-### Creating PRs
-1. Fetch default reviewers: `bb_get /repositories/{ws}/{repo}/default-reviewers`
-2. Filter out the author (Andrew Morgan / andrewmorganmtc) - authors can't review their own PR
-3. Create PR with remaining reviewers, destination branch `staging`
-
-### Merging PRs
-- **Wait for CI pipeline to pass before merging**
-- Always use `"close_source_branch": true`
-- Use `"merge_strategy": "merge_commit"`
-
-### PR Comments Formatting
-
-- **No emojis** - Never use checkmarks, crosses, or any emoji characters
-- **Blank lines required** - Add blank line after headings and between list items
-- **One item per line** - Each numbered/bulleted item must be on its own line
+**Note:** Invoke skills with `/skill-name` (e.g., `/bitbucket-helpers`). Skills contain detailed workflow instructions.
 
 ## Git Workflow
 
