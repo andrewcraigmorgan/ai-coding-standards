@@ -66,6 +66,14 @@ When asked "what version of coding standards are you using?" or similar:
 2. Check if updates are available: `git -C ~/ai-coding-standards fetch && git -C ~/ai-coding-standards log HEAD..origin/main --oneline`
 3. If updates exist, offer to pull: `git -C ~/ai-coding-standards pull`
 
+## Setup Check
+
+**Proactively verify setup when using Bitbucket or Zoho tools:**
+
+1. Check MCP tools are available (if `mcp__bitbucket__*` or `mcp__zoho-projects__*` calls fail, guide user through MCP setup below)
+2. Check skills are installed: `ls ~/.claude/skills/bitbucket-helpers ~/.claude/skills/zoho-task 2>/dev/null`
+3. If skills missing: `cp -r ~/ai-coding-standards/skills/* ~/.claude/skills/`
+
 ## Required MCP Servers
 
 | MCP Server | Package/Repository | Purpose |
@@ -116,14 +124,12 @@ Reference: [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mc
 
 ## Custom Skills
 
-Copy to `~/.claude/skills/`:
-
 | Skill | Purpose |
 | ----- | ------- |
 | `bitbucket-helpers` | PR creation with default reviewers, merge with branch cleanup |
 | `zoho-task` | Task workflow automation based on Zoho task status |
 
-**Note:** Invoke skills with `/skill-name` (e.g., `/bitbucket-helpers`). Skills contain detailed workflow instructions.
+Invoke with `/skill-name` (e.g., `/bitbucket-helpers`).
 
 ## Git Workflow
 
